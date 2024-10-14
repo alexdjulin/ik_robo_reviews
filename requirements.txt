@@ -1,0 +1,3 @@
+pandas
+matplotlib
+sentence-transformers
