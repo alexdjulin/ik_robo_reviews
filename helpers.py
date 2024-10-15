@@ -47,6 +47,7 @@ def load_pickled_dataset(file_path: str) -> pd.DataFrame | None:
 
     try:
         data = pd.read_pickle(file_path)
+        data.reset_index(drop=True, inplace=True)  # reset index
         print(f'Dataset loaded from {file_path}.')
         return data
 
