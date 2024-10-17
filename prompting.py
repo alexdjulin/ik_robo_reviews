@@ -81,22 +81,21 @@ Write a positive product review from these recurring ideas, that presents the pr
 ### Product Name:
 Experience V2 Smartphone
 
-### Review recurring ideas:
-Battery life is frequently mentioned, with users appreciating its ability to last through a full day of use.
-Build quality is a recurring theme, with users complimenting its sturdy and premium design.
-Camera performance is noted, with users enjoying clear, high-quality photos, especially in good lighting.
-Price is occasionally mentioned, with some users feeling it’s slightly high for the features offered.
+### Recurring ideas:
+Good battery life, enough for a full day of use.
+Sturdy and premium design.
+Good camera performance, clear, high-quality photos, especially in good lighting.
+Price slightly high for the features offered.
 
 ### Positive product review:
-Reliable smartphone with vibrant display, long-lasting Battery, and premium build quality
-The product has received impressive feedback from users, especially for its vibrant and sharp screen quality. The colors are rich and bring media content to life, making it ideal for streaming and everyday use. Another standout feature is the long-lasting battery life, which comfortably supports a full day of usage without the need for frequent recharging—a major plus for users on the go.
-Additionally, the premium build quality gives the device a sturdy, high-end feel, with many appreciating its sleek design and solid construction. The camera has also been a popular highlight, capturing clear and vivid photos, particularly in well-lit conditions.
-Though generally well-regarded, some users noted that the price might feel slightly high relative to other models. However, with its reliable performance and standout features, this product offers substantial value and has been positively received overall.
+This product offers excellent battery life, lasting a full day, and has a sturdy, premium design.
+The camera performs well, capturing clear photos, especially in good lighting.
+Though slightly pricey for the features, its quality build and reliability make it a solid choice.
 
 ### Product Name:
 {product_name}
 
-### Review recurring ideas:
+### Recurring ideas:
 {review_ideas}
 
 ### Positive product review:
@@ -202,8 +201,11 @@ def generate_reviews_recurring_ideas(model: object, tokenizer: object, review_te
 
     # extract recurring ideas
     recurrent_ideas = result.split('### Recurring Ideas:\n')[-1].split('\n')
+    # remove any empty strings or text after the last ideas
+    recurrent_ideas = recurrent_ideas[:recurrent_ideas.index("")] if "" in recurrent_ideas else recurrent_ideas
     # remove the last one in case it's incomplete
-    recurrent_ideas = recurrent_ideas[:-1]
+    if not recurrent_ideas[-1].endswith('.'):
+        recurrent_ideas = recurrent_ideas[:-1]
     # remove the numbers that may confuse the model
     recurrent_ideas = [ideas[3:] for ideas in recurrent_ideas]
 
@@ -234,14 +236,18 @@ def generate_final_review(model: object, tokenizer: object, product_name: str, r
     # remove line breaks
     final_review = final_review.replace('\n', ' ')
 
+    # remove any trailing artifacts
+    final_review = final_review.split('###')[0].strip()
+
     # remove last sentence from review if incomplete
-    final_review = '.'.join(final_review.split('.')[:-1]) + '.'
+    if not final_review.endswith('.'):
+        final_review = '.'.join(final_review.split('.')[:-1]) + '.'
 
     # summarize the review to get title
     title = generate_review_summary(model, tokenizer, final_review, max_tokens=20)
 
-    # set default title if missing or too long
-    if not title or title.split() > 20:
-        title = f"Product Review of {product_name}"
+    # set default title if missing or too long (first sentence of review)
+    if len(title.split()) < 2 or len(title.split()) > 15:
+        title = final_review.split('.')[0]
 
     return title, final_review
