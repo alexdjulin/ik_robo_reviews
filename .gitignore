@@ -155,10 +155,12 @@ dmypy.json
 cython_debug/
 
 # Project-specific
-dataset/
 *.csv
 *.zip
-pickle/
 *.pkl
 Notes.ipynb
+dataset/
+pickle/
 presentation/
+models/
+*.pem
