@@ -11,6 +11,7 @@ Description: Helper methods to interact with the dataset quickly.
 # Import statements
 import os
 import re
+import pickle
 import pandas as pd
 from random import randint
 from tqdm import tqdm
@@ -56,4 +57,48 @@ def load_pickled_dataset(file_path: str) -> pd.DataFrame | None:
 
     except FileNotFoundError:
         print(f'No pickled dataset found at {file_path}.')
+        return None
+
+
+def pickle_list_reviews(reviews_list: list, filepath: str) -> None:
+    """Save a list of reviews to a pickle file.
+
+    Args:
+        reviews_list (list): The list of reviews to save.
+        filepath (str): The path to the pickle file.
+
+    Exceptions:
+        FileNotFoundError: If the file path is not found.
+    """
+
+    try:
+        with open(filepath, 'wb') as f:
+            pickle.dump(reviews_list, f)
+            print(f'Reviews pickled to {filepath}.')
+
+    except FileNotFoundError as e:
+        print(f'Error pickling reviews: {e}')
+
+
+def load_pickled_reviews(filepath: str) -> list | None:
+    """Load a list of reviews from a pickle file.
+
+    Args:
+        filepath (str): The path to the pickle file.
+
+    Returns:
+        list | None: The list of reviews.
+
+    Exceptions:
+        FileNotFoundError: If the file path is not found.
+    """
+
+    try:
+        with open(filepath, 'rb') as f:
+            reviews = pickle.load(f)
+            print(f'Reviews loaded from {filepath}.')
+            return reviews
+
+    except FileNotFoundError as e:
+        print(f'Error loading reviews: {e}')
         return None
