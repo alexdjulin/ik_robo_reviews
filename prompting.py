@@ -76,21 +76,21 @@ Analyze the following list of product reviews. Provide a concise summary of the 
 # PROMPT 3 -----------------------------------------------------------------------------------------
 # Generate a product review with a title and product description based on a list of recurring ideas
 prompt_final_product_review = """
-Write a positive product review from these recurring ideas, that presents the product, highlights its pros, and subtly mentions a few minor downsides reported by some users.
+Write a detailed and positive product review based on the recurring ideas listed below. The review should emphasize the product's strong points while subtly mentioning a few minor downsides reported by some users.
 
 ### Product Name:
 Experience V2 Smartphone
 
-### List of recurring ideas:
-Good battery life, enough for a full day of use.
-Sturdy and premium design.
-Good camera performance, clear, high-quality photos, especially in good lighting.
-Price slightly high for the features offered.
+### Recurring ideas:
+1. Excellent battery life, lasting a full day of use even with heavy apps.
+2. Premium build quality and sleek design, making it durable and stylish.
+3. High-quality camera that performs well, especially in bright conditions, but struggles a little in low light.
+4. Slightly higher price compared to competitors, but offers great value for the features provided.
 
 ### Positive product review:
-This product offers excellent battery life, lasting a full day, and has a sturdy, premium design.
-The camera performs well, capturing clear photos, especially in good lighting.
-Though slightly pricey for the features, its quality build and reliability make it a solid choice.
+The Experience V2 Smartphone is a standout choice for anyone looking for a reliable, high-performance device. Its excellent battery life ensures a full day's use, even when running demanding applications. The premium build quality and sleek design give it a stylish yet durable feel, making it a pleasure to hold and use.
+The camera quality is another highlight, producing sharp, vibrant photos, particularly in bright settings, which makes it great for outdoor photography. While it may struggle a little in low-light situations, it still performs better than many of its competitors.
+Although the price is slightly higher than other models, the overall quality and performance justify the investment. If you're seeking a smartphone that balances design, performance, and reliability, the Experience V2 is an excellent choice.
 
 ### Product Name:
 {product_name}
@@ -100,6 +100,7 @@ Though slightly pricey for the features, its quality build and reliability make 
 
 ### Positive product review:
 """
+
 
 
 # PROMPTING FUNCTIONS ------------------------------------------------------------------------------
