@@ -81,7 +81,7 @@ Write a positive product review from these recurring ideas, that presents the pr
 ### Product Name:
 Experience V2 Smartphone
 
-### Recurring ideas:
+### List of recurring ideas:
 Good battery life, enough for a full day of use.
 Sturdy and premium design.
 Good camera performance, clear, high-quality photos, especially in good lighting.

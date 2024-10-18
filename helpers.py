@@ -14,6 +14,8 @@ import pickle
 import pandas as pd
 import random
 from functools import reduce
+import re
+from IPython.display import display, HTML
 from tqdm import tqdm
 tqdm.pandas()
 
@@ -325,3 +327,81 @@ def sample_product_reviews(name: str, category: str, n: int = 10) -> list:
     random.shuffle(all_reviews)
 
     return all_reviews
+
+
+def sanitize_filename(text: str) -> str:
+    """Sanitize a text to be used as a filename.
+
+    Args:
+        text (str): The text to sanitize.
+
+    Returns:
+        str: The sanitized text.
+
+    Exceptions:
+        AttributeError: If no image URLs are found.
+
+    """
+    return re.sub(r'[^\w\s-]', '', text).strip().replace(' ', '_')
+
+
+def generate_html_from_product_review(review_dict: dict, save_html=True, display_in_notebook=False) -> str:
+    """Generate an HTML page from a product review.
+
+    Args:
+        review_dict (dict): A dictionnary containing product information and review.
+        save_html (bool, optional): Save the HTML to a file. Defaults to True.
+        display_in_notebook (bool, optional): Display the HTML in the notebook. Defaults to False.
+
+    Returns:
+        str: path to the saved html file
+    """
+
+    # Generate HTML content
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{review_dict.get('product', '')}</title>
+    </head>
+    <body>
+        <h1>{review_dict.get('product', '')}</h1>
+        <h3>{review_dict.get('category', '')}</h3>
+        <h4>{review_dict.get('brand', '')} | {review_dict.get('manufacturer', '')}</h3>
+        <h2>{review_dict.get('title', '')}</h2>
+        <p>{review_dict.get('review', '')}</p>
+
+    """
+
+    # Split IMAGEURLS and keep only unique URLs
+    try:
+        image_urls = list(set(review_dict["imageURLs"].split(",")))
+    except AttributeError:
+        image_urls = []
+
+    # Loop through unique URLs and add each image to the HTML content
+    for url in image_urls:
+        html_content += f'<img src="{url}" alt="{review_dict["product"]}" style="width:300px;height:auto;margin:10px;"><br>'
+
+    html_content += """
+    </body>
+    </html>
+    """
+
+    if save_html:
+        # Create a safe file name
+        category_safe = sanitize_filename(review_dict['category'])
+        product_safe = sanitize_filename(review_dict['product'])
+        file_name = f"{category_safe}_{product_safe}.html"
+
+        # Save the HTML content to a file
+        with open(file_name, "w", encoding="utf-8") as file:
+            file.write(html_content)
+
+        print(f"File saved as {file_name}")
+
+    # Display the HTML in the notebook
+    if display_in_notebook:
+        display(HTML(html_content))
