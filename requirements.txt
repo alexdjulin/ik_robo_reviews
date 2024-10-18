@@ -2,5 +2,9 @@ numpy
 pandas
 matplotlib
 tqdm
+transformers
 sentence-transformers
 gradio
+torch
+scikit-learn
+joblib
