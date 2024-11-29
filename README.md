@@ -21,9 +21,26 @@ Grade: 11.40 / 12
 
 # Robo Reviews - Automated Product Review Generation
 
-Robo Reviews is a project designed to process, analyze, and summarize product reviews. It leverages transformer models for sentiment analysis, clustering models to group products into categories, and a text generation model to produce insightful product reviews based on recurring user feedback. The tool provides insights into the most frequently mentioned pros and cons, helping users quickly understand the strengths and weaknesses of various products.
+Robo Reviews is a project designed to process, analyze, and summarize product reviews. It implements 3 different transformer models:
+- A clustering model to group products into categories
+- A sentiment analysis model to classify positive, neutral and negative reviews
+- A text generation model to produce insightful product reviews based on recurring user feedback. 
+ 
+The tool provides insights into the most frequently mentioned pros and cons, helping users quickly understand the strengths and weaknesses of various products.
 
 <img src="readme/robo_reviews.png" width=500>
+
+## Project Results
+I successfully implemented the 3 models mentioned above. 
+
+At the end of this project, I was able to input a dataset of amazon product reviews, clusterize them into 6 main categories and classify the main review sentiment (positive, neutral, negative):
+
+<img src="readme/clustering_sentiment.png" width=500>
+
+Then I leveraged prompt-engineering using Mistral7B (4bits quant.) to generate an HTML review of the best rated product in a given category based on a subset of data.
+
+<img src="readme/review_gen.png" width=800>
+
 
 ## Project Setup
 Follow these steps to clone the repository and create a virtual environment:
