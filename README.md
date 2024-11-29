@@ -1,8 +1,29 @@
-# Robo Reviews - Automated Product Review Generation
-IronHack Project  |  Week 6
+![logo_ironhack_blue 7](https://user-images.githubusercontent.com/23629340/40541063-a07a0a8a-601a-11e8-91b5-2f13e4e6b441.png)
 
-## Project Description
+This project was part of a 9-week training course I attended in 2024.
+- **Bootcamp**: Ironhack [AI Engineering bootcamp](https://www.ironhack.com/de-en/artificial-intelligence/remote)
+- **Date**: September to November 2024
+- **Project topics**: Data processing, Clustering, Sentiment Analysis, Generative AI, Prompt FineTuning, Sklearn, LLMs, Mistral7B
+
+Final Grade and teacher's feedback:
+```
+- Presentation a bit rushed, you spent 3 minutes just with the intro, and the interesting parts were at the end.
+- Great choices, very smart decisions and combination of techniques
+- Excellent visual evaluation of the clustering model, which was probably the hardest one as there were no real labels
+- Preprocessing and modeling was very good, with lots of experimentation
+- Good README
+- The code is well structured in notebooks, with clear sections, and very readable
+
+Grade: 11.40 / 12
+```
+
+----
+
+# Robo Reviews - Automated Product Review Generation
+
 Robo Reviews is a project designed to process, analyze, and summarize product reviews. It leverages transformer models for sentiment analysis, clustering models to group products into categories, and a text generation model to produce insightful product reviews based on recurring user feedback. The tool provides insights into the most frequently mentioned pros and cons, helping users quickly understand the strengths and weaknesses of various products.
+
+<img src="readme/robo_reviews.png" width=500>
 
 ## Project Setup
 Follow these steps to clone the repository and create a virtual environment:
@@ -32,4 +53,4 @@ pip install -r requirements.txt
 - **prompting.py:** Contains code for generating prompts for the models, including text generation and summarization prompts.
 
 ### Documents
-- **Robo_Reviews_presentation.pdf:** Final presentation of the project
+- **robo_reviews_presentation.pdf:** Final presentation of the project
